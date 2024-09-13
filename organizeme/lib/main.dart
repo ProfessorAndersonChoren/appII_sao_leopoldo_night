@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
       darkTheme: MaterialTheme(Theme.of(context).textTheme).dark(),
       initialRoute: '/tasks',
       routes: {
-        '/tasks': (_) => const TasksPage(),
+        '/tasks': (_) => TasksPage(),
       },
       debugShowCheckedModeBanner: false,
     );
