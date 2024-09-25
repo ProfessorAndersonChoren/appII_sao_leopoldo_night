@@ -1,0 +1,28 @@
+name: agenda_de_contatos
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: "^3.0.5"
+
+dependencies:
+  email_validator: ^3.0.0
+  flutter:
+    sdk: flutter
+  flutter_masked_text2: ^0.9.1
+  flutter_mobx: ^2.2.1+1
+  mobx: ^2.3.3+2
+  sqflite: ^2.3.3+1
+
+dev_dependencies:
+  build_runner: ^2.4.12
+  flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
+  mobx_codegen: ^2.6.1
+
+flutter:
+  uses-material-design: true
