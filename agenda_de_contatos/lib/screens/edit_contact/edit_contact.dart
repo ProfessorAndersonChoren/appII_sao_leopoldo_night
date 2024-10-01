@@ -1,10 +1,9 @@
 import 'package:agenda_de_contatos/model/contact.dart';
 
 import 'package:agenda_de_contatos/screens/new_contact/components/custom_textfield.dart';
-import 'package:agenda_de_contatos/store/favorite_store.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:flutter_masked_text3/flutter_masked_text3.dart';
 
 class EditContact extends StatelessWidget {
   EditContact({super.key});
@@ -19,21 +18,19 @@ class EditContact extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  final _store = FavoriteStore();
-
   @override
   Widget build(BuildContext context) {
     // Argumentos
-    final args = ModalRoute.of(context)!.settings.arguments as Contact;
+    final contact = ModalRoute.of(context)!.settings.arguments as Contact;
 
-    _nameController.text = args.name;
-    _lastNameController.text = args.lastName;
-    _emailController.text = args.email;
-    _phoneController.text = args.phone;
+    _nameController.text = contact.name;
+    _lastNameController.text = contact.lastName;
+    _emailController.text = contact.email;
+    _phoneController.text = contact.phone;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Editar Nicole"),
+        title: Text("Editar ${contact.name}"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -87,31 +84,13 @@ class EditContact extends StatelessWidget {
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
                   validator: (value) {
-                    print(value!.length);
-                    if (value.isEmpty) {
+                    if (value != null && value.isEmpty) {
                       return "O número de telefone não pode ficar em branco";
-                    } else if (value.length != 17) {
+                    } else if (value != null && value.length != 17) {
                       return "O número de telefone é inválido";
                     }
                     return null;
                   },
-                ),
-                Row(
-                  children: [
-                    Switch(
-                      value: _store.isFavorite,
-                      onChanged: (value) {
-                        _store.changeState(value);
-                      },
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      "Favorito",
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ],
                 ),
               ],
             ),

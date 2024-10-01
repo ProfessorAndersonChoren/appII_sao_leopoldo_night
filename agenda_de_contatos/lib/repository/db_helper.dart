@@ -8,8 +8,7 @@ class DBHelper {
   CREATE TABLE $_tableName(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(50) NOT NULL,
-    lastname VARCHAR(50) NOT NULL,
-    photoPath VARCHAR(100) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
     phone CHAR(17) NOT NULL,
     email VARCHAR(30) NOT NULL,
     isFavorite INTEGER NOT NULL

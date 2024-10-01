@@ -1,7 +1,7 @@
-import 'dart:io';
-
 import 'package:agenda_de_contatos/model/contact.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:slideable/slideable.dart';
 
 class ListItem extends StatelessWidget {
   final Contact contact;
@@ -12,27 +12,65 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Observer(builder: (_) {
+      return Slideable(
+        items: <ActionItems>[
+          ActionItems(
+            icon: const Icon(
+              Icons.edit,
+              color: Colors.orange,
+            ),
+            onPress: () {},
+            backgroudColor: Colors.transparent,
+          ),
+          ActionItems(
+            icon: const Icon(
+              Icons.delete,
+              color: Colors.red,
+            ),
+            onPress: () {},
+            backgroudColor: Colors.transparent,
+          ),
+        ],
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primaryContainer,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: ListElement(contact: contact),
+        ),
+      );
+    });
+  }
+}
+
+class ListElement extends StatelessWidget {
+  const ListElement({
+    super.key,
+    required this.contact,
+  });
+
+  final Contact contact;
+
+  @override
+  Widget build(BuildContext context) {
     return ListTile(
-      leading: IconButton(
-        icon: Icon(
+      leading: Observer(builder: (_) {
+        return Icon(
           (contact.isFavorite) ? Icons.star : Icons.star_outline,
           color: Theme.of(context).colorScheme.secondary,
-        ),
-        iconSize: 24,
-        onPressed: () {
-          
-        },
-      ),
+        );
+      }),
       title: Row(
         children: [
-          ClipOval(
-            child: Image.file(
-              File(
-                (contact.photoPath),
+          CircleAvatar(
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            child: Text(
+              contact.name.substring(0, 1).toUpperCase(),
+              style: TextStyle(
+                color: Colors.white,
               ),
-              width: 30,
-              height: 30,
-              fit: BoxFit.cover,
             ),
           ),
           const SizedBox(
@@ -52,17 +90,6 @@ class ListItem extends StatelessWidget {
             ],
           ),
         ],
-      ),
-      trailing: IconButton(
-        icon: const Icon(Icons.chevron_right),
-        onPressed: () {
-          Navigator.pushNamed(
-            context,
-            "/details",
-            arguments: contact,
-          );
-        },
-        iconSize: 16,
       ),
     );
   }
