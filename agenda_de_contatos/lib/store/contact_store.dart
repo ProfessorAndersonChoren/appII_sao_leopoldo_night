@@ -17,6 +17,12 @@ abstract class _ContactsStoreBase with Store {
     _contacts.add(contact);
   }
 
+  void remove(int id) {
+    _contacts.removeWhere(
+      (e) => e.id == id,
+    );
+  }
+
   @action
   void load(List<Contact> contacts) {
     _contacts.addAll(contacts);

@@ -18,19 +18,21 @@ class Contact {
     return {
       'id': id,
       'name': name,
-      'lastName': lastName,
+      'lastname': lastName,
       'phone': phone,
       'email': email,
       'isFavorite': (isFavorite) ? 1 : 0,
     };
   }
 
-  factory Contact.fromMap(Map<String, Object?> map) => Contact(
-        id: map['id'] as int?,
-        name: map['name'] as String,
-        lastName: map['lastName'] as String,
-        email: map['email'] as String,
-        phone: map['phone'] as String,
-        isFavorite: map['isFavorite'] == 1,
-      );
+  factory Contact.fromMap(Map<String, Object?> map) {
+    return Contact(
+      id: map['id'] as int,
+      name: map['name'] as String,
+      lastName: map['lastname'] as String,
+      phone: map['phone'] as String,
+      email: map['email'] as String,
+      isFavorite: map['isFavorite'] == 1,
+    );
+  }
 }

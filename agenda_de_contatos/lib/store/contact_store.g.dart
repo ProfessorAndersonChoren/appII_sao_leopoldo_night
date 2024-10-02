@@ -48,6 +48,17 @@ mixin _$ContactsStore on _ContactsStoreBase, Store {
   }
 
   @override
+  void load(List<Contact> contacts) {
+    final _$actionInfo = _$_ContactsStoreBaseActionController.startAction(
+        name: '_ContactsStoreBase.load');
+    try {
+      return super.load(contacts);
+    } finally {
+      _$_ContactsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 contacts: ${contacts}
